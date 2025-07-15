@@ -1,0 +1,1397 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "forceNER": true
+  },
+  "nluManager": {
+    "settings": {},
+    "languages": [
+      "en"
+    ],
+    "intentDomains": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "language": "en",
+          "useNoneFeature": true,
+          "config": {
+            "activation": "leaky-relu",
+            "hiddenLayers": [],
+            "iterations": 20000,
+            "learningRate": 0.7,
+            "errorThresh": 0.00005,
+            "momentum": 0.5,
+            "deltaErrorThresh": 0.000001,
+            "maxDecimals": 9,
+            "leakyReluAlpha": 0.08,
+            "timeout": 120000
+          }
+        },
+        "language": "en",
+        "nluClassName": "BrainNLU",
+        "useMasterDomain": true,
+        "trainByDomain": false,
+        "keepStopwords": true,
+        "stemDict": {
+          "go,hi,just,say,to": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "heya": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hello,hi": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "howdi": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hey,there": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hi,there": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "greet": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hey": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "long,no,see,time": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hello": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "day,is,it,love,not": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "greet,i,you": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "again,hello": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hi": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "hello,there": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "a,day,good": {
+            "domain": "default",
+            "intent": "Default Welcome Intent"
+          },
+          "assign,code,complet,delet,task": {
+            "domain": "default",
+            "intent": "DeleteTask"
+          },
+          "cancel,client,email,send,to": {
+            "domain": "default",
+            "intent": "DeleteTask"
+          },
+          "book,flight,from,list,my,remov,ticket": {
+            "domain": "default",
+            "intent": "DeleteTask"
+          },
+          "appoint,dentist,get,of,rid,task,the": {
+            "domain": "default",
+            "intent": "DeleteTask"
+          },
+          "bill,delet,electr,name,pay,task": {
+            "domain": "default",
+            "intent": "DeleteTask"
+          },
+          "client,email,me,pleas,remind,send,to,to": {
+            "domain": "default",
+            "intent": "AddTask"
+          },
+          "a,add,assign,call,code,complet,task": {
+            "domain": "default",
+            "intent": "AddTask"
+          },
+          "add,i,prepar,present,slide,to,want": {
+            "domain": "default",
+            "intent": "AddTask"
+          },
+          "appoint,dentist,new,schedul,task": {
+            "domain": "default",
+            "intent": "AddTask"
+          },
+          "bill,electr,me,pay,remind,to": {
+            "domain": "default",
+            "intent": "AddTask"
+          },
+          "as,done,mark,prepar,present,slide": {
+            "domain": "default",
+            "intent": "CompleteTask"
+          },
+          "book,complet,of,task,the,ticket": {
+            "domain": "default",
+            "intent": "CompleteTask"
+          },
+          "bill,electr,finish,pay,task": {
+            "domain": "default",
+            "intent": "CompleteTask"
+          },
+          "clean,complet,i,room,the": {
+            "domain": "default",
+            "intent": "CompleteTask"
+          },
+          "appoint,dentist,done,schedul,task": {
+            "domain": "default",
+            "intent": "CompleteTask"
+          },
+          "are,my,task,what": {
+            "domain": "default",
+            "intent": "ListTasks"
+          },
+          "do,everyth,i,list,need,to": {
+            "domain": "default",
+            "intent": "ListTasks"
+          },
+          "do,list,my,show,to": {
+            "domain": "default",
+            "intent": "ListTasks"
+          },
+          "complet,do,have,i,to,what": {
+            "domain": "default",
+            "intent": "ListTasks"
+          },
+          "me,my,task,tell": {
+            "domain": "default",
+            "intent": "ListTasks"
+          }
+        },
+        "intentDict": {
+          "Default Welcome Intent": "default",
+          "DeleteTask": "default",
+          "AddTask": "default",
+          "CompleteTask": "default",
+          "ListTasks": "default"
+        },
+        "useStemDict": true,
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "language": "en",
+              "useNoneFeature": true,
+              "config": {
+                "activation": "leaky-relu",
+                "hiddenLayers": [],
+                "iterations": 20000,
+                "learningRate": 0.7,
+                "errorThresh": 0.00005,
+                "momentum": 0.5,
+                "deltaErrorThresh": 0.000001,
+                "maxDecimals": 9,
+                "leakyReluAlpha": 0.08,
+                "timeout": 120000
+              }
+            },
+            "language": "en",
+            "keepStopwords": true,
+            "docs": [
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "just",
+                  "go",
+                  "to",
+                  "say",
+                  "hi"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "heya"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hello",
+                  "hi"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "howdi"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hey",
+                  "there"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hi",
+                  "there"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "greet"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hey"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "long",
+                  "time",
+                  "no",
+                  "see"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hello"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "love",
+                  "day",
+                  "is",
+                  "not",
+                  "it"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "i",
+                  "greet",
+                  "you"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hello",
+                  "again"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hi"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "hello",
+                  "there"
+                ]
+              },
+              {
+                "intent": "Default Welcome Intent",
+                "tokens": [
+                  "a",
+                  "good",
+                  "day"
+                ]
+              },
+              {
+                "intent": "DeleteTask",
+                "tokens": [
+                  "delet",
+                  "complet",
+                  "code",
+                  "assign",
+                  "task"
+                ]
+              },
+              {
+                "intent": "DeleteTask",
+                "tokens": [
+                  "cancel",
+                  "send",
+                  "email",
+                  "to",
+                  "client"
+                ]
+              },
+              {
+                "intent": "DeleteTask",
+                "tokens": [
+                  "remov",
+                  "book",
+                  "flight",
+                  "ticket",
+                  "from",
+                  "my",
+                  "list"
+                ]
+              },
+              {
+                "intent": "DeleteTask",
+                "tokens": [
+                  "get",
+                  "rid",
+                  "of",
+                  "the",
+                  "dentist",
+                  "appoint",
+                  "task"
+                ]
+              },
+              {
+                "intent": "DeleteTask",
+                "tokens": [
+                  "delet",
+                  "task",
+                  "name",
+                  "pay",
+                  "electr",
+                  "bill"
+                ]
+              },
+              {
+                "intent": "AddTask",
+                "tokens": [
+                  "pleas",
+                  "remind",
+                  "me",
+                  "to",
+                  "send",
+                  "email",
+                  "to",
+                  "client"
+                ]
+              },
+              {
+                "intent": "AddTask",
+                "tokens": [
+                  "add",
+                  "a",
+                  "task",
+                  "call",
+                  "complet",
+                  "code",
+                  "assign"
+                ]
+              },
+              {
+                "intent": "AddTask",
+                "tokens": [
+                  "i",
+                  "want",
+                  "to",
+                  "add",
+                  "prepar",
+                  "present",
+                  "slide"
+                ]
+              },
+              {
+                "intent": "AddTask",
+                "tokens": [
+                  "new",
+                  "task",
+                  "schedul",
+                  "dentist",
+                  "appoint"
+                ]
+              },
+              {
+                "intent": "AddTask",
+                "tokens": [
+                  "remind",
+                  "me",
+                  "to",
+                  "pay",
+                  "electr",
+                  "bill"
+                ]
+              },
+              {
+                "intent": "CompleteTask",
+                "tokens": [
+                  "mark",
+                  "prepar",
+                  "present",
+                  "slide",
+                  "as",
+                  "done"
+                ]
+              },
+              {
+                "intent": "CompleteTask",
+                "tokens": [
+                  "complet",
+                  "the",
+                  "task",
+                  "of",
+                  "book",
+                  "ticket"
+                ]
+              },
+              {
+                "intent": "CompleteTask",
+                "tokens": [
+                  "finish",
+                  "pay",
+                  "electr",
+                  "bill",
+                  "task"
+                ]
+              },
+              {
+                "intent": "CompleteTask",
+                "tokens": [
+                  "i",
+                  "complet",
+                  "clean",
+                  "the",
+                  "room"
+                ]
+              },
+              {
+                "intent": "CompleteTask",
+                "tokens": [
+                  "task",
+                  "done",
+                  "schedul",
+                  "dentist",
+                  "appoint"
+                ]
+              },
+              {
+                "intent": "ListTasks",
+                "tokens": [
+                  "what",
+                  "are",
+                  "my",
+                  "task"
+                ]
+              },
+              {
+                "intent": "ListTasks",
+                "tokens": [
+                  "list",
+                  "everyth",
+                  "i",
+                  "need",
+                  "to",
+                  "do"
+                ]
+              },
+              {
+                "intent": "ListTasks",
+                "tokens": [
+                  "show",
+                  "my",
+                  "to",
+                  "do",
+                  "list"
+                ]
+              },
+              {
+                "intent": "ListTasks",
+                "tokens": [
+                  "what",
+                  "do",
+                  "i",
+                  "have",
+                  "to",
+                  "complet"
+                ]
+              },
+              {
+                "intent": "ListTasks",
+                "tokens": [
+                  "tell",
+                  "me",
+                  "my",
+                  "task"
+                ]
+              }
+            ],
+            "features": {
+              "just": 1,
+              "go": 1,
+              "to": 9,
+              "say": 1,
+              "hi": 4,
+              "heya": 1,
+              "hello": 4,
+              "howdi": 1,
+              "hey": 2,
+              "there": 3,
+              "greet": 2,
+              "long": 1,
+              "time": 1,
+              "no": 1,
+              "see": 1,
+              "love": 1,
+              "day": 2,
+              "is": 1,
+              "not": 1,
+              "it": 1,
+              "i": 5,
+              "you": 1,
+              "again": 1,
+              "a": 2,
+              "good": 1,
+              "delet": 2,
+              "complet": 5,
+              "code": 2,
+              "assign": 2,
+              "task": 10,
+              "cancel": 1,
+              "send": 2,
+              "email": 2,
+              "client": 2,
+              "remov": 1,
+              "book": 2,
+              "flight": 1,
+              "ticket": 2,
+              "from": 1,
+              "my": 4,
+              "list": 3,
+              "get": 1,
+              "rid": 1,
+              "of": 2,
+              "the": 3,
+              "dentist": 3,
+              "appoint": 3,
+              "name": 1,
+              "pay": 3,
+              "electr": 3,
+              "bill": 3,
+              "pleas": 1,
+              "remind": 2,
+              "me": 3,
+              "add": 2,
+              "call": 1,
+              "want": 1,
+              "prepar": 2,
+              "present": 2,
+              "slide": 2,
+              "new": 1,
+              "schedul": 2,
+              "mark": 1,
+              "as": 1,
+              "done": 2,
+              "finish": 1,
+              "clean": 1,
+              "room": 1,
+              "what": 2,
+              "are": 1,
+              "everyth": 1,
+              "need": 1,
+              "do": 3,
+              "show": 1,
+              "have": 1,
+              "tell": 1
+            },
+            "isEditing": false,
+            "className": "BrainNLU",
+            "classifier": {
+              "className": "BrainClassifier",
+              "settings": {
+                "language": "en",
+                "useNoneFeature": true,
+                "config": {
+                  "activation": "leaky-relu",
+                  "hiddenLayers": [],
+                  "iterations": 20000,
+                  "learningRate": 0.7,
+                  "errorThresh": 0.00005,
+                  "momentum": 0.5,
+                  "deltaErrorThresh": 0.000001,
+                  "maxDecimals": 9,
+                  "leakyReluAlpha": 0.08,
+                  "timeout": 120000
+                }
+              },
+              "labels": [],
+              "network": {
+                "sizes": [
+                  77,
+                  6
+                ],
+                "layers": [
+                  {
+                    "just": {},
+                    "go": {},
+                    "to": {},
+                    "say": {},
+                    "hi": {},
+                    "heya": {},
+                    "hello": {},
+                    "howdi": {},
+                    "hey": {},
+                    "there": {},
+                    "greet": {},
+                    "long": {},
+                    "time": {},
+                    "no": {},
+                    "see": {},
+                    "love": {},
+                    "day": {},
+                    "is": {},
+                    "not": {},
+                    "it": {},
+                    "i": {},
+                    "you": {},
+                    "again": {},
+                    "a": {},
+                    "good": {},
+                    "delet": {},
+                    "complet": {},
+                    "code": {},
+                    "assign": {},
+                    "task": {},
+                    "cancel": {},
+                    "send": {},
+                    "email": {},
+                    "client": {},
+                    "remov": {},
+                    "book": {},
+                    "flight": {},
+                    "ticket": {},
+                    "from": {},
+                    "my": {},
+                    "list": {},
+                    "get": {},
+                    "rid": {},
+                    "of": {},
+                    "the": {},
+                    "dentist": {},
+                    "appoint": {},
+                    "name": {},
+                    "pay": {},
+                    "electr": {},
+                    "bill": {},
+                    "pleas": {},
+                    "remind": {},
+                    "me": {},
+                    "add": {},
+                    "call": {},
+                    "want": {},
+                    "prepar": {},
+                    "present": {},
+                    "slide": {},
+                    "new": {},
+                    "schedul": {},
+                    "mark": {},
+                    "as": {},
+                    "done": {},
+                    "finish": {},
+                    "clean": {},
+                    "room": {},
+                    "what": {},
+                    "are": {},
+                    "everyth": {},
+                    "need": {},
+                    "do": {},
+                    "show": {},
+                    "have": {},
+                    "tell": {},
+                    "nonefeature": {}
+                  },
+                  {
+                    "Default Welcome Intent": {
+                      "bias": 9.560907786,
+                      "weights": {
+                        "just": 1.254511118,
+                        "go": 1.254511118,
+                        "to": -2.979922295,
+                        "say": 1.254511118,
+                        "hi": 2.152766466,
+                        "heya": 3.064529896,
+                        "hello": 2.065449238,
+                        "howdi": 3.137052298,
+                        "hey": 2.726383686,
+                        "there": 0.744087994,
+                        "greet": 3.178590775,
+                        "long": 0.761330307,
+                        "time": 0.761330307,
+                        "no": 0.761330307,
+                        "see": 0.761330307,
+                        "love": 0.407986939,
+                        "day": 1.348273993,
+                        "is": 0.407986939,
+                        "not": 0.407986939,
+                        "it": 0.407986939,
+                        "i": -1.66102612,
+                        "you": 1.436465502,
+                        "again": 0.969404519,
+                        "a": 0.659328878,
+                        "good": 0.940288126,
+                        "delet": -1.23485744,
+                        "complet": -2.697913408,
+                        "code": -1.031540155,
+                        "assign": -1.031540155,
+                        "task": -4.839820862,
+                        "cancel": -1.397978663,
+                        "send": -1.729497313,
+                        "email": -1.729497313,
+                        "client": -1.729497313,
+                        "remov": -0.936970711,
+                        "book": -0.936970711,
+                        "flight": -0.936970711,
+                        "ticket": -0.936970711,
+                        "from": -0.936970711,
+                        "my": -2.783180237,
+                        "list": -2.105817795,
+                        "get": -0.573515475,
+                        "rid": -0.573515475,
+                        "of": -0.573515475,
+                        "the": -2.115326405,
+                        "dentist": -1.47267127,
+                        "appoint": -1.47267127,
+                        "name": -0.484274656,
+                        "pay": -1.438653588,
+                        "electr": -1.438653588,
+                        "bill": -1.438653588,
+                        "pleas": -0.33151865,
+                        "remind": -0.873698294,
+                        "me": -1.405500054,
+                        "add": -0.950273514,
+                        "call": -0.280957371,
+                        "want": -0.669316113,
+                        "prepar": -1.925995708,
+                        "present": -1.925995708,
+                        "slide": -1.925995708,
+                        "new": -0.883548677,
+                        "schedul": -0.899159789,
+                        "mark": -1.256680369,
+                        "as": -1.256680369,
+                        "done": -1.272291422,
+                        "finish": -0.41220209,
+                        "clean": -1.541812778,
+                        "room": -1.541812778,
+                        "what": -1.031911016,
+                        "are": -0.907344639,
+                        "everyth": -0.761787415,
+                        "need": -0.761787415,
+                        "do": -1.293416619,
+                        "show": -0.407064974,
+                        "have": -0.124566995,
+                        "tell": -0.531803608,
+                        "nonefeature": -9.448095322
+                      }
+                    },
+                    "DeleteTask": {
+                      "bias": 0.397519034,
+                      "weights": {
+                        "just": -0.045767989,
+                        "go": -0.045767989,
+                        "to": -0.068951853,
+                        "say": -0.045767989,
+                        "hi": -0.399155706,
+                        "heya": -0.399665922,
+                        "hello": -0.402703911,
+                        "howdi": -0.397810042,
+                        "hey": -0.398533434,
+                        "there": -0.209213704,
+                        "greet": -0.397518724,
+                        "long": -0.116016641,
+                        "time": -0.116016641,
+                        "no": -0.116016641,
+                        "see": -0.116016641,
+                        "love": -0.092222825,
+                        "day": -0.092222825,
+                        "is": -0.092222825,
+                        "not": -0.092222825,
+                        "it": -0.092222825,
+                        "i": -0.546755672,
+                        "again": -0.09232299,
+                        "a": -1.624560714,
+                        "delet": 7.364984035,
+                        "complet": -1.003268838,
+                        "code": 2.642227411,
+                        "assign": 2.642227411,
+                        "task": 0.45631057,
+                        "cancel": 4.696476936,
+                        "send": 2.491652012,
+                        "email": 2.491652012,
+                        "client": 2.491652012,
+                        "remov": 3.338222027,
+                        "book": -0.307270497,
+                        "flight": 3.338222027,
+                        "ticket": -0.307270497,
+                        "from": 3.338222027,
+                        "my": 1.02177,
+                        "list": 1.680585265,
+                        "get": 4.027476788,
+                        "rid": 4.027476788,
+                        "of": 0.381990343,
+                        "the": 0.381990343,
+                        "dentist": 1.41361773,
+                        "appoint": 1.41361773,
+                        "name": 3.098197699,
+                        "pay": 0.394329607,
+                        "electr": 0.394329607,
+                        "bill": 0.394329607,
+                        "pleas": -2.204830647,
+                        "remind": -2.79937911,
+                        "me": -2.79937911,
+                        "add": -1.887210965,
+                        "call": -1.624560714,
+                        "want": -0.262650222,
+                        "prepar": -0.326949894,
+                        "present": -0.326949894,
+                        "slide": -0.326949894,
+                        "new": -1.610840797,
+                        "schedul": -2.613868475,
+                        "mark": -0.064299658,
+                        "as": -0.064299658,
+                        "done": -1.067329168,
+                        "finish": -2.109324217,
+                        "what": -0.94292134,
+                        "are": -0.94292134,
+                        "everyth": -0.28410545,
+                        "need": -0.28410545,
+                        "do": -1.657640934,
+                        "show": -1.373535752,
+                        "nonefeature": -0.403480679
+                      }
+                    },
+                    "AddTask": {
+                      "bias": -0.395146803,
+                      "weights": {
+                        "just": -0.589399219,
+                        "go": -0.589399219,
+                        "to": 2.337949753,
+                        "say": -0.589399219,
+                        "hi": -0.590494812,
+                        "heya": -0.061729535,
+                        "hello": -0.085527658,
+                        "howdi": -0.058651503,
+                        "hey": -0.084108703,
+                        "there": -0.058469143,
+                        "greet": -0.135848269,
+                        "long": -0.034697175,
+                        "time": -0.034697175,
+                        "no": -0.034697175,
+                        "see": -0.034697175,
+                        "love": -0.012064124,
+                        "day": -0.948228478,
+                        "is": -0.012064124,
+                        "not": -0.012064124,
+                        "it": -0.012064124,
+                        "i": 0.223148093,
+                        "you": -0.089545533,
+                        "again": -0.026480535,
+                        "a": 2.279539824,
+                        "good": -0.93616432,
+                        "delet": -1.838317275,
+                        "complet": -0.223353997,
+                        "code": 1.410218716,
+                        "assign": 1.410218716,
+                        "task": -0.363624662,
+                        "cancel": -2.106472731,
+                        "send": 0.054127753,
+                        "email": 0.054127753,
+                        "client": 0.054127753,
+                        "book": -0.651243508,
+                        "ticket": -0.651243508,
+                        "my": -1.688738108,
+                        "list": -0.993085206,
+                        "get": -0.372777522,
+                        "rid": -0.372777522,
+                        "of": -1.024018526,
+                        "the": -1.408125043,
+                        "dentist": 1.968235135,
+                        "appoint": 1.968235135,
+                        "name": -0.032836605,
+                        "pay": 0.77432996,
+                        "electr": 0.77432996,
+                        "bill": 0.77432996,
+                        "pleas": 2.160607338,
+                        "remind": 4.674396038,
+                        "me": 3.5598104,
+                        "add": 5.166443348,
+                        "call": 3.215704441,
+                        "want": 1.950732589,
+                        "prepar": 1.072291017,
+                        "present": 1.072291017,
+                        "slide": 1.072291017,
+                        "new": 6.981283665,
+                        "schedul": 2.34101367,
+                        "mark": -0.878441453,
+                        "as": -0.878441453,
+                        "done": -5.518709183,
+                        "finish": -1.706631422,
+                        "clean": -0.384106487,
+                        "room": -0.384106487,
+                        "what": -0.834994078,
+                        "are": -0.236773029,
+                        "everyth": -0.655707538,
+                        "need": -0.655707538,
+                        "do": -1.59130621,
+                        "show": -0.337377638,
+                        "have": -0.598221064,
+                        "tell": -1.114587307,
+                        "nonefeature": -0.093279287
+                      }
+                    },
+                    "CompleteTask": {
+                      "bias": -0.096146907,
+                      "weights": {
+                        "just": -0.059028406,
+                        "go": -0.059028406,
+                        "to": -2.680260181,
+                        "say": -0.059028406,
+                        "hi": -0.496260762,
+                        "heya": -0.359254062,
+                        "hello": -0.497301221,
+                        "howdi": -0.338056773,
+                        "hey": -0.425744653,
+                        "there": -0.357338935,
+                        "greet": -0.56002897,
+                        "long": -0.170275882,
+                        "time": -0.170275882,
+                        "no": -0.170275882,
+                        "see": -0.170275882,
+                        "love": -0.132026643,
+                        "day": -0.235635981,
+                        "is": -0.132026643,
+                        "not": -0.132026643,
+                        "it": -0.132026643,
+                        "i": 0.791082382,
+                        "you": -0.319217891,
+                        "again": -0.105773948,
+                        "a": -0.561780334,
+                        "good": -0.103609331,
+                        "delet": -4.14242506,
+                        "complet": 3.295667171,
+                        "code": -1.639736056,
+                        "assign": -1.639736056,
+                        "task": 2.142705917,
+                        "remov": -0.615575075,
+                        "book": 2.095598221,
+                        "flight": -0.615575075,
+                        "ticket": 2.095598221,
+                        "from": -0.615575075,
+                        "my": -2.014225245,
+                        "list": -1.051769376,
+                        "get": -2.633102894,
+                        "rid": -2.633102894,
+                        "of": 0.078065269,
+                        "the": 2.888512611,
+                        "dentist": -0.12087772,
+                        "appoint": -0.12087772,
+                        "name": -2.960859776,
+                        "pay": 1.669717073,
+                        "electr": 1.669717073,
+                        "bill": 1.669717073,
+                        "remind": -0.813707948,
+                        "me": -1.43604064,
+                        "add": -1.243288994,
+                        "call": -0.458171099,
+                        "want": -0.785117924,
+                        "prepar": 0.568588853,
+                        "present": 0.568588853,
+                        "slide": 0.568588853,
+                        "new": -4.317027092,
+                        "schedul": 2.512228012,
+                        "mark": 1.353707552,
+                        "as": 1.353707552,
+                        "done": 8.182965279,
+                        "finish": 5.444291115,
+                        "clean": 2.810442209,
+                        "room": 2.810442209,
+                        "what": -1.255154848,
+                        "are": -0.668943346,
+                        "everyth": -0.328820378,
+                        "need": -0.328820378,
+                        "do": -1.022405863,
+                        "show": -0.107374057,
+                        "have": -0.586211503,
+                        "tell": -0.622332752,
+                        "nonefeature": -0.376222044
+                      }
+                    },
+                    "ListTasks": {
+                      "bias": -0.079797224,
+                      "weights": {
+                        "just": -0.603004813,
+                        "go": -0.603004813,
+                        "to": 1.607480168,
+                        "say": -0.603004813,
+                        "hi": -0.832525313,
+                        "heya": -0.260074079,
+                        "hello": -0.404065758,
+                        "howdi": -0.241963536,
+                        "hey": -0.34976536,
+                        "there": -0.291329741,
+                        "greet": -0.86400044,
+                        "long": -0.148400366,
+                        "time": -0.148400366,
+                        "no": -0.148400366,
+                        "see": -0.148400366,
+                        "love": -0.128057733,
+                        "day": -0.220049113,
+                        "is": -0.128057733,
+                        "not": -0.128057733,
+                        "it": -0.128057733,
+                        "i": 1.632755399,
+                        "you": -0.688957572,
+                        "again": -0.080311373,
+                        "a": -0.213460371,
+                        "good": -0.091991395,
+                        "delet": -0.972034931,
+                        "complet": 0.15154697,
+                        "code": -0.949261427,
+                        "assign": -0.949261427,
+                        "task": 2.798808575,
+                        "cancel": -0.390061229,
+                        "send": -0.765961707,
+                        "email": -0.765961707,
+                        "client": -0.765961707,
+                        "remov": -1.220257759,
+                        "book": -1.220257759,
+                        "flight": -1.220257759,
+                        "ticket": -1.220257759,
+                        "from": -1.220257759,
+                        "my": 4.53374958,
+                        "list": 1.426833987,
+                        "get": -0.306150019,
+                        "rid": -0.306150019,
+                        "of": -0.306150019,
+                        "the": -0.772267997,
+                        "dentist": -0.926059306,
+                        "appoint": -0.926059306,
+                        "name": -0.144242361,
+                        "pay": -0.891261935,
+                        "electr": -0.891261935,
+                        "bill": -0.891261935,
+                        "pleas": -0.375900984,
+                        "remind": -0.985011995,
+                        "me": 2.131115198,
+                        "add": -0.749928594,
+                        "call": -0.121468984,
+                        "want": -0.628459632,
+                        "prepar": -0.628459632,
+                        "present": -0.628459632,
+                        "slide": -0.628459632,
+                        "new": -0.372891814,
+                        "schedul": -0.619909167,
+                        "done": -0.247017652,
+                        "finish": -0.137909353,
+                        "clean": -0.466118395,
+                        "room": -0.466118395,
+                        "what": 3.407082319,
+                        "are": 1.840157866,
+                        "everyth": 1.849361062,
+                        "need": 1.849361062,
+                        "do": 4.214005947,
+                        "show": 0.797728002,
+                        "have": 1.566925764,
+                        "tell": 3.116122007,
+                        "nonefeature": -0.304858506
+                      }
+                    },
+                    "None": {
+                      "bias": 1.164829303,
+                      "weights": {
+                        "just": -0.112737261,
+                        "go": -0.112737261,
+                        "to": -0.447675288,
+                        "say": -0.112737261,
+                        "hi": -1.164827228,
+                        "heya": -1.164841056,
+                        "hello": -1.164827943,
+                        "howdi": -1.164828658,
+                        "hey": -1.164828062,
+                        "there": -0.421517462,
+                        "greet": -1.164828062,
+                        "long": -0.291207254,
+                        "time": -0.291207254,
+                        "no": -0.291207254,
+                        "see": -0.291207254,
+                        "love": -0.166671336,
+                        "day": -0.498145998,
+                        "is": -0.166671336,
+                        "not": -0.166671336,
+                        "it": -0.166671336,
+                        "i": -0.347411662,
+                        "you": -0.128356233,
+                        "again": -0.214658037,
+                        "a": -0.335208297,
+                        "good": -0.331474364,
+                        "delet": -0.131227866,
+                        "complet": -0.264932156,
+                        "code": -0.095628992,
+                        "assign": -0.095628992,
+                        "task": -0.577410817,
+                        "cancel": -0.163248211,
+                        "send": -0.184635103,
+                        "email": -0.184635103,
+                        "client": -0.184635103,
+                        "remov": -0.118518785,
+                        "book": -0.118518785,
+                        "flight": -0.118518785,
+                        "ticket": -0.118518785,
+                        "from": -0.118518785,
+                        "my": -0.363539696,
+                        "list": -0.208695292,
+                        "get": -0.044571768,
+                        "rid": -0.044571768,
+                        "of": -0.044571768,
+                        "the": -0.213876173,
+                        "dentist": -0.169175208,
+                        "appoint": -0.169175208,
+                        "name": -0.039333299,
+                        "pay": -0.168140143,
+                        "electr": -0.168140143,
+                        "bill": -0.168140143,
+                        "pleas": -0.021386888,
+                        "remind": -0.067196466,
+                        "me": -0.145537227,
+                        "add": -0.018051198,
+                        "call": -0.003733941,
+                        "want": -0.014317257,
+                        "prepar": -0.201273382,
+                        "present": -0.201273382,
+                        "slide": -0.201273382,
+                        "new": -0.124463655,
+                        "schedul": -0.12460392,
+                        "mark": -0.186956123,
+                        "as": -0.186956123,
+                        "done": -0.187096387,
+                        "finish": -0.082997546,
+                        "clean": -0.169304401,
+                        "room": -0.169304401,
+                        "what": -0.11193911,
+                        "are": -0.11193911,
+                        "everyth": -0.035434939,
+                        "need": -0.035434939,
+                        "do": -0.090176731,
+                        "show": -0.054741826,
+                        "tell": -0.07834097,
+                        "nonefeature": 11.335162163
+                      }
+                    }
+                  }
+                ],
+                "trainOpts": {
+                  "iterations": 20000,
+                  "errorThresh": 0.00005,
+                  "fixedError": false,
+                  "deltaErrorThresh": 0.000001,
+                  "learningRate": 0.7,
+                  "momentum": 0.5,
+                  "leakyReluAlpha": 0.08,
+                  "maxDecimals": 9,
+                  "log": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "extraSentences": [
+      [
+        "en",
+        "just going to say hi"
+      ],
+      [
+        "en",
+        "heya"
+      ],
+      [
+        "en",
+        "hello hi"
+      ],
+      [
+        "en",
+        "howdy"
+      ],
+      [
+        "en",
+        "hey there"
+      ],
+      [
+        "en",
+        "hi there"
+      ],
+      [
+        "en",
+        "greetings"
+      ],
+      [
+        "en",
+        "hey"
+      ],
+      [
+        "en",
+        "long time no see"
+      ],
+      [
+        "en",
+        "hello"
+      ],
+      [
+        "en",
+        "lovely day isn't it"
+      ],
+      [
+        "en",
+        "I greet you"
+      ],
+      [
+        "en",
+        "hello again"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "hello there"
+      ],
+      [
+        "en",
+        "a good day"
+      ],
+      [
+        "en",
+        "Delete complete coding assignment task"
+      ],
+      [
+        "en",
+        "Cancel send email to client"
+      ],
+      [
+        "en",
+        "Remove book flight tickets from my list"
+      ],
+      [
+        "en",
+        "Get rid of the dentist appointment task"
+      ],
+      [
+        "en",
+        "Delete task named pay electricity bill"
+      ],
+      [
+        "en",
+        "Please remind me to send email to client"
+      ],
+      [
+        "en",
+        "Add a task called complete coding assignment"
+      ],
+      [
+        "en",
+        "I want to add prepare presentation slides"
+      ],
+      [
+        "en",
+        "New task: schedule dentist appointment"
+      ],
+      [
+        "en",
+        "Remind me to pay electricity bill"
+      ],
+      [
+        "en",
+        "Mark prepare presentation slides as done"
+      ],
+      [
+        "en",
+        "Complete the task of booking tickets"
+      ],
+      [
+        "en",
+        "Finish pay electricity bill task"
+      ],
+      [
+        "en",
+        "I completed clean the room"
+      ],
+      [
+        "en",
+        "Task done: schedule dentist appointment"
+      ],
+      [
+        "en",
+        "What are my tasks"
+      ],
+      [
+        "en",
+        "List everything I need to do"
+      ],
+      [
+        "en",
+        "Show my to-do list"
+      ],
+      [
+        "en",
+        "What do I have to complete"
+      ],
+      [
+        "en",
+        "Tell me my tasks"
+      ]
+    ]
+  },
+  "nerManager": {
+    "settings": {},
+    "threshold": 0.8,
+    "builtins": [
+      "Number",
+      "Ordinal",
+      "Percentage",
+      "Age",
+      "Currency",
+      "Dimension",
+      "Temperature",
+      "DateTime",
+      "PhoneNumber",
+      "IpAddress",
+      "Boolean",
+      "Email",
+      "Hashtag",
+      "URL"
+    ],
+    "namedEntities": {}
+  },
+  "slotManager": {},
+  "responses": {},
+  "actions": {},
+  "utteranceDict": {
+    "?": "help"
+  }
+}

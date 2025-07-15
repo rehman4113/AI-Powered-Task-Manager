@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Powered Task Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+
+        /* Custom class for the glassmorphism effect */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        .tasks-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .tasks-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .tasks-list::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .tasks-list::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Animation for the listening status */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+        .listening-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-br from-cyan-50 to-blue-200">
+
+        <div class="w-full max-w-4xl mx-auto">
+            <header class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Task Manager</h1>
+                <p class="text-slate-600 mt-2">Your personal assistant powered by AI</p>
+            </header>
+
+            <section id="control-section" class="glassmorphism p-6 rounded-2xl shadow-lg mb-8">
+                <div class="flex items-center gap-4">
+                    <div class="relative w-full">
+                        <input type="text" id="textInput" placeholder="e.g., 'Add a task to buy milk'" class="w-full pl-12 pr-28 py-3 bg-white/50 border border-slate-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-300" autocomplete="off" />
+                        <svg class="w-6 h-6 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <button id="textSubmitBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300">Send</button>
+                    </div>
+                    <button id="voiceBtn" title="Use Voice Control" class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition duration-300 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                    </button>
+                </div>
+                <div id="statusContainer" class="text-center mt-4 h-6">
+                    <p id="listeningStatus" class="text-purple-700 font-medium hidden listening-pulse">Listening...</p>
+                    <p id="voiceResponse" class="text-slate-700 font-medium hidden"></p>
+                    <p id="errorMessage" class="text-red-600 font-medium hidden"></p>
+                </div>
+            </section>
+
+            <section class="grid md:grid-cols-2 gap-8">
+                <div class="glassmorphism p-6 rounded-2xl shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-800 border-b-2 border-blue-300 pb-2">Pending</h2>
+                    <div id="pendingTasksContainer" class="tasks-list max-h-96 overflow-y-auto pr-2 space-y-3">
+                        </div>
+                </div>
+                <div class="glassmorphism p-6 rounded-2xl shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-800 border-b-2 border-green-300 pb-2">Completed</h2>
+                    <div id="completedTasksContainer" class="tasks-list max-h-96 overflow-y-auto pr-2 space-y-3">
+                           </div>
+                </div>
+            </section>
+
+              <footer class="text-center mt-12">
+                <p class="text-slate-500">© <span id="currentYear"></span> AI-Powered Task Manager. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
+            <h3 class="text-lg font-bold mb-4" id="modalTitle">Confirm Action</h3>
+            <p id="modalMessage" class="mb-6">Are you sure?</p>
+            <div class="flex justify-end gap-4">
+                <button id="modalCancelBtn" class="px-4 py-2 bg-slate-200 text-slate-800 rounded-lg hover:bg-slate-300 transition">Cancel</button>
+                <button id="modalConfirmBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- DOM Elements ---
+            const voiceBtn = document.getElementById('voiceBtn');
+            const listeningStatus = document.getElementById('listeningStatus');
+            const voiceResponse = document.getElementById('voiceResponse');
+            const errorMessage = document.getElementById('errorMessage');
+            const pendingTasksContainer = document.getElementById('pendingTasksContainer');
+            const completedTasksContainer = document.getElementById('completedTasksContainer');
+            const currentYear = document.getElementById('currentYear');
+            const textInput = document.getElementById('textInput');
+            const textSubmitBtn = document.getElementById('textSubmitBtn');
+            const confirmationModal = document.getElementById('confirmationModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+            const modalCancelBtn = document.getElementById('modalCancelBtn');
+
+            // --- State ---
+            let isListening = false;
+            let recognition;
+            
+            // --- Initialization ---
+            currentYear.textContent = new Date().getFullYear();
+            setupVoiceRecognition();
+            fetchAllTasks();
+
+            // --- Event Listeners ---
+            voiceBtn.addEventListener('click', toggleVoiceRecognition);
+            textSubmitBtn.addEventListener('click', handleTextCommand);
+            textInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleTextCommand();
+            });
+            modalCancelBtn.addEventListener('click', () => confirmationModal.classList.add('hidden'));
+
+            // --- Voice Recognition Setup ---
+            function setupVoiceRecognition() {
+                if ('webkitSpeechRecognition' in window) {
+                    recognition = new webkitSpeechRecognition();
+                    recognition.continuous = false;
+                    recognition.interimResults = false;
+                    recognition.lang = 'en-US';
+
+                    recognition.onresult = (event) => {
+                        const transcript = event.results[0][0].transcript;
+                        processCommandWithAI(transcript);
+                    };
+
+                    recognition.onerror = (event) => {
+                        showError(`Voice error: ${event.error}`);
+                        stopVoiceRecognition();
+                    };
+
+                    recognition.onend = () => {
+                        if (isListening) {
+                           stopVoiceRecognition();
+                        }
+                    };
+
+                } else {
+                    voiceBtn.disabled = true;
+                    showError('Voice control not supported in your browser');
+                }
+            }
+
+            function toggleVoiceRecognition() {
+                if (isListening) {
+                    stopVoiceRecognition();
+                } else {
+                    startVoiceRecognition();
+                }
+            }
+
+            function startVoiceRecognition() {
+                isListening = true;
+                voiceBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+                voiceBtn.classList.remove('bg-purple-600', 'hover:bg-purple-700');
+                showListening('Listening...');
+                recognition.start();
+            }
+
+            function stopVoiceRecognition() {
+                isListening = false;
+                voiceBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+                voiceBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
+                hideAllStatus();
+                if (recognition) recognition.stop();
+            }
+
+            // --- Command Processing ---
+            function handleTextCommand() {
+                const command = textInput.value.trim();
+                if (command) {
+                    textInput.value = '';
+                    processCommandWithAI(command);
+                }
+            }
+
+            async function processCommandWithAI(command) {
+                hideAllStatus();
+                showResponse(`AI is processing: "${command}"`);
+
+                try {
+                    // Define the URL for your custom Node.js NLP backend
+                    const nodeNlpBackendUrl = 'http://localhost:3001/api/process-command'; // Ensure this matches the port and path in server.js
+
+                    // Send the raw user command to your Node.js NLP backend
+                    const response = await fetch(nodeNlpBackendUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ command: command }) // Send the command in a JSON object
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.text();
+                        throw new Error(`Node.js NLP Backend Error! status: ${response.status} - ${errorData}`);
+                    }
+
+                    // Parse the JSON response from your Node.js NLP backend (which is forwarded from Spring Boot)
+                    const finalAiData = await response.json();
+                    console.log("Final response from Node.js NLP backend (via Spring Boot):", finalAiData); // For debugging
+
+                    // Display the fulfillment text from the backend
+                    if (finalAiData.fulfillmentText) {
+                        showResponse(finalAiData.fulfillmentText);
+                    } else {
+                        showResponse("Command processed successfully by AI.");
+                    }
+
+                    // After processing, refresh the task list from your Spring Boot backend
+                    fetchAllTasks();
+
+                } catch (error) {
+                    console.error('Frontend to NLP Backend Error:', error);
+                    showError(`Sorry, an error occurred in AI processing: ${error.message || error}`);
+                } finally {
+                    stopVoiceRecognition();
+                }
+            }
+            
+            // The `sendToBackend` function is now handled within `processCommandWithAI` in the Node.js backend
+            // You no longer need a separate `sendToBackend` function in the frontend for AI data.
+            // However, your original `sendToBackend` logic seemed to be calling the Spring Boot webhook
+            // which the Node.js backend is now responsible for.
+
+            // The direct task manipulation functions (toggleTaskCompletion, deleteTask) still call Spring Boot directly.
+
+            // --- Task Rendering and Management ---
+            async function fetchAllTasks() {
+                try {
+                    const response = await fetch('http://localhost:8080/api/tasks/all');
+                    if (!response.ok) throw new Error('Failed to fetch tasks from server');
+                    const tasks = await response.json();
+                    renderTasks(tasks);
+                } catch (error) {
+                    console.error('Error fetching tasks:', error);
+                    showError(error.message);
+                    // Render empty to clear stale data
+                    renderTasks([]);
+                }
+            }
+
+            function renderTasks(tasks) {
+                pendingTasksContainer.innerHTML = '';
+                completedTasksContainer.innerHTML = '';
+
+                if (!tasks || tasks.length === 0) {
+                    pendingTasksContainer.innerHTML = createEmptyState('No tasks yet. Add one to get started!');
+                    completedTasksContainer.innerHTML = createEmptyState('No completed tasks yet.');
+                    return;
+                }
+
+                const sortedTasks = [...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                sortedTasks.forEach(task => {
+                    const taskElement = createTaskElement(task);
+                    if (task.status && task.status.toUpperCase() === 'DONE') {
+                        completedTasksContainer.appendChild(taskElement);
+                    } else {
+                        pendingTasksContainer.appendChild(taskElement);
+                    }
+                });
+
+                if (pendingTasksContainer.children.length === 0) {
+                    pendingTasksContainer.innerHTML = createEmptyState('All tasks completed! Great job!');
+                }
+                if (completedTasksContainer.children.length === 0) {
+                    completedTasksContainer.innerHTML = createEmptyState('No completed tasks yet.');
+                }
+            }
+
+            function createEmptyState(message) {
+                return `<div class="text-center py-8 text-slate-500">${message}</div>`;
+            }
+
+            function createTaskElement(task) {
+                const taskElement = document.createElement('div');
+                const isCompleted = task.status && task.status.toUpperCase() === 'DONE';
+                const taskText = task.description || task.title || 'No description';
+
+                taskElement.className = `flex items-center p-3 rounded-lg transition duration-200 ${isCompleted ? 'bg-green-100' : 'bg-white hover:bg-slate-50'}`;
+
+                taskElement.innerHTML = `
+                    <div class="flex-shrink-0">
+                        <input type="checkbox" data-id="${task.id}" class="task-checkbox h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer" ${isCompleted ? 'checked' : ''}>
+                    </div>
+                    <div class="flex-grow mx-3">
+                        <p class="font-medium ${isCompleted ? 'line-through text-slate-500' : 'text-slate-800'}">${taskText}</p>
+                        <p class="text-xs text-slate-400">${formatDate(task.createdAt)}</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button data-id="${task.id}" class="delete-btn text-slate-400 hover:text-red-600 transition p-1 rounded-full">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                `;
+
+                const checkbox = taskElement.querySelector('.task-checkbox');
+                checkbox.addEventListener('change', () => toggleTaskCompletion(task));
+
+                const deleteBtn = taskElement.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', () => confirmDeletion(task.id));
+
+                return taskElement;
+            }
+
+            async function toggleTaskCompletion(task) {
+                const newStatus = (task.status && task.status.toUpperCase() === 'DONE') ? 'PENDING' : 'DONE';
+                try {
+                    const response = await fetch(`http://localhost:8080/api/tasks/update/${task.id}?desc=${encodeURIComponent(task.description)}&status=${newStatus}`, {
+                        method: 'PUT',
+                    });
+                    if (!response.ok) throw new Error('Failed to update task status');
+                    showResponse(`Task marked as ${newStatus.toLowerCase()}.`);
+                    fetchAllTasks();
+                } catch (error) {
+                    console.error('Error updating task:', error);
+                    showError('Could not update the task.');
+                    fetchAllTasks();
+                }
+            }
+
+            function confirmDeletion(taskId) {
+                modalTitle.textContent = 'Delete Task';
+                modalMessage.textContent = 'Are you sure you want to permanently delete this task?';
+                confirmationModal.classList.remove('hidden');
+
+                const newConfirmBtn = modalConfirmBtn.cloneNode(true);
+                modalConfirmBtn.parentNode.replaceChild(newConfirmBtn, modalConfirmBtn);
+                
+                newConfirmBtn.addEventListener('click', () => {
+                    deleteTask(taskId);
+                    confirmationModal.classList.add('hidden');
+                }, { once: true });
+            }
+
+            async function deleteTask(taskId) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/tasks/delete/${taskId}`, {
+                        method: 'DELETE'
+                    });
+                    if (!response.ok) throw new Error('Failed to delete task');
+                    showResponse('Task deleted successfully.');
+                    fetchAllTasks();
+                } catch (error) {
+                    console.error('Error deleting task:', error);
+                    showError('Could not delete the task.');
+                }
+            }
+
+            // --- Utility and UI Functions ---
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+            }
+
+            function hideAllStatus() {
+                listeningStatus.classList.add('hidden');
+                voiceResponse.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+            }
+
+            function showListening(message) {
+                hideAllStatus();
+                listeningStatus.textContent = message;
+                listeningStatus.classList.remove('hidden');
+            }
+
+            function showResponse(message) {
+                hideAllStatus();
+                voiceResponse.textContent = message;
+                voiceResponse.classList.remove('hidden');
+                setTimeout(hideAllStatus, 4000);
+            }
+
+            function showError(message) {
+                hideAllStatus();
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('hidden');
+                setTimeout(hideAllStatus, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
